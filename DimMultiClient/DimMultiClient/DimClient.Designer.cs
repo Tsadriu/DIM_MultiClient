@@ -43,7 +43,7 @@ namespace DimMultiClient
             // 
             // webView
             // 
-            this.webView.AllowExternalDrop = false;
+            this.webView.AllowExternalDrop = true;
             this.webView.CreationProperties = null;
             this.webView.DefaultBackgroundColor = System.Drawing.Color.DarkGray;
             this.webView.Location = new System.Drawing.Point(-1, 0);
