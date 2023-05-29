@@ -5,7 +5,7 @@ namespace DimMultiClient
 {
     internal static class Program
     {
-        private static VersionEnum currentVersion = VersionEnum.V1_0_0;
+        private static VersionEnum currentVersion = VersionEnum.V1_0_1;
         public static DimMultiClientLauncher Launcher = null!;
 
         /// <summary>
