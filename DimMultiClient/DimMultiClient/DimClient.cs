@@ -6,16 +6,16 @@ namespace DimMultiClient
 {
     public partial class DimClient : Form
     {
-        private readonly string dimLink = "https://app.destinyitemmanager.com/";
-        private string currentUser = string.Empty;
-        private bool isFullScreen = false;
+        private const string DimLink = "https://app.destinyitemmanager.com/";
+        private string _currentUser = string.Empty;
+        private bool _isFullScreen;
 
         public DimClient(string windowName, int width, int height, bool isFullScreen)
         {
             InitializeComponent();
             dimMenuStrip.Visible = false;
             SetWindowProperties(windowName, width, height, isFullScreen);
-            Task.Run(LaunchGame);
+            Task.Run(LaunchDimClient);
         }
 
         /// <summary>
@@ -25,26 +25,23 @@ namespace DimMultiClient
         /// <param name="keyEvent">Current event.</param>
         private void webView_KeyDown(object sender, KeyEventArgs keyEvent)
         {
-            if (keyEvent.KeyCode == Keys.Home)
+            switch (keyEvent.KeyCode)
             {
-                dimMenuStrip.Visible = !dimMenuStrip.Visible;
-            }
-
-            if (keyEvent.KeyCode == Keys.F11)
-            {
-                if (isFullScreen)
-                {
-                    isFullScreen = false;
+                case Keys.Home:
+                    dimMenuStrip.Visible = !dimMenuStrip.Visible;
+                    break;
+                case Keys.F11 when _isFullScreen:
+                    _isFullScreen = false;
                     FormBorderStyle = FormBorderStyle.Sizable;
                     WindowState = FormWindowState.Normal;
                     CenterToScreen();
                     return;
-                }
-
-                isFullScreen = true;
-                FormBorderStyle = FormBorderStyle.None;
-                WindowState = FormWindowState.Maximized;
-                CenterToScreen();
+                case Keys.F11:
+                    _isFullScreen = true;
+                    FormBorderStyle = FormBorderStyle.None;
+                    WindowState = FormWindowState.Maximized;
+                    CenterToScreen();
+                    break;
             }
         }
 
@@ -68,29 +65,33 @@ namespace DimMultiClient
         private void SetWindowProperties(string profileName, int width, int height, bool isFullScreen)
         {
             StartPosition = Program.Launcher.StartPosition;
-            currentUser = profileName;
+            _currentUser = profileName;
             Size = new Size(width, height);
-            Text += $"{Program.GetVersionAsString()} - {profileName.LetterUpperCase()}";
-            Resize += new EventHandler(ResizeWebView);
+            Text += $@"{Program.GetVersionAsString()} - {profileName.LetterUpperCase()}";
+            Resize += ResizeWebView;
             Location = Program.Launcher.Location;
 
             // Resize the window.
-            ResizeWebView(this, EventArgs.Empty);
+            ResizeWebView(null, EventArgs.Empty);
             webView_KeyDown(this, isFullScreen ? new KeyEventArgs(Keys.F11) : new KeyEventArgs(Keys.None));
         }
 
         /// <summary>
-        /// Task that launches a web request to load the game.
+        /// Task that launches a web request to load the dim client.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task LaunchGame()
+        public async Task LaunchDimClient()
         {
-            var directory = Path.Combine(DimMultiClientLauncher.ProgramNetworkStorage, currentUser);
+            string directory = Path.Combine(DimMultiClientLauncher.ProgramNetworkStorage, _currentUser);
             var webViewEnvironment = await CoreWebView2Environment.CreateAsync(string.Empty, directory);
             await webView.EnsureCoreWebView2Async(webViewEnvironment);
-            webView.Source = new Uri(dimLink);
-            webView.CoreWebView2.Settings.UserAgent = "Chrome/103.0.0.0";
+            webView.Source = new Uri(DimLink);
+            
+            // Set the agent to appear as a chrome browser
+            webView.CoreWebView2.Settings.UserAgent = "Chrome/114.0.0.0";
             webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            
+            // Display the window to the user
             Show();
         }
 
