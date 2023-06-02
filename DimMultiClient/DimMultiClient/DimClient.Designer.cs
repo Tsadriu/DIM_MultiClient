@@ -32,79 +32,83 @@ namespace DimMultiClient
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DimClient));
-            this.webView = new Microsoft.Web.WebView2.WinForms.WebView2();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.dimMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.reloadPageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hideToolbarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
-            this.dimMenuStrip.SuspendLayout();
-            this.SuspendLayout();
+            webView = new Microsoft.Web.WebView2.WinForms.WebView2();
+            toolStripTextBox1 = new ToolStripTextBox();
+            dimMenuStrip = new MenuStrip();
+            reloadPageMenuItem = new ToolStripMenuItem();
+            hideToolbarMenuItem = new ToolStripMenuItem();
+            closeClientToolStripMenuItem = new ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)webView).BeginInit();
+            dimMenuStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // webView
             // 
-            this.webView.AllowExternalDrop = true;
-            this.webView.CreationProperties = null;
-            this.webView.DefaultBackgroundColor = System.Drawing.Color.DarkGray;
-            this.webView.Location = new System.Drawing.Point(-1, 0);
-            this.webView.Name = "webView";
-            this.webView.Size = new System.Drawing.Size(1266, 682);
-            this.webView.TabIndex = 1;
-            this.webView.ZoomFactor = 1D;
-            this.webView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.webView_KeyDown);
+            webView.AllowExternalDrop = true;
+            webView.CreationProperties = null;
+            webView.DefaultBackgroundColor = Color.DarkGray;
+            webView.Location = new Point(-1, 0);
+            webView.Name = "webView";
+            webView.Size = new Size(1266, 682);
+            webView.TabIndex = 1;
+            webView.ZoomFactor = 1D;
+            webView.KeyDown += webView_KeyDown;
             // 
             // toolStripTextBox1
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
-            this.toolStripTextBox1.ReadOnly = true;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.toolStripTextBox1.Text = "(Press F11 to hide/show)";
+            toolStripTextBox1.Name = "toolStripTextBox1";
+            toolStripTextBox1.Overflow = ToolStripItemOverflow.Always;
+            toolStripTextBox1.ReadOnly = true;
+            toolStripTextBox1.Size = new Size(100, 23);
+            toolStripTextBox1.Text = "(Press F11 to hide/show)";
             // 
             // dimMenuStrip
             // 
-            this.dimMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripTextBox1,
-            this.reloadPageMenuItem,
-            this.hideToolbarMenuItem});
-            this.dimMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.dimMenuStrip.Name = "dimMenuStrip";
-            this.dimMenuStrip.Size = new System.Drawing.Size(1264, 24);
-            this.dimMenuStrip.TabIndex = 2;
-            this.dimMenuStrip.Text = "DIM Helper";
+            dimMenuStrip.Items.AddRange(new ToolStripItem[] { toolStripTextBox1, reloadPageMenuItem, closeClientToolStripMenuItem, hideToolbarMenuItem });
+            dimMenuStrip.Location = new Point(0, 0);
+            dimMenuStrip.Name = "dimMenuStrip";
+            dimMenuStrip.Size = new Size(1264, 24);
+            dimMenuStrip.TabIndex = 2;
+            dimMenuStrip.Text = "DIM Helper";
             // 
             // reloadPageMenuItem
             // 
-            this.reloadPageMenuItem.Name = "reloadPageMenuItem";
-            this.reloadPageMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.reloadPageMenuItem.Text = "Reload page";
-            this.reloadPageMenuItem.Click += new System.EventHandler(this.reloadPageMenuItem_Click);
+            reloadPageMenuItem.Name = "reloadPageMenuItem";
+            reloadPageMenuItem.Size = new Size(84, 20);
+            reloadPageMenuItem.Text = "Reload page";
+            reloadPageMenuItem.Click += reloadPageMenuItem_Click;
             // 
             // hideToolbarMenuItem
             // 
-            this.hideToolbarMenuItem.Name = "hideToolbarMenuItem";
-            this.hideToolbarMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.hideToolbarMenuItem.Text = "Hide menu";
-            this.hideToolbarMenuItem.Click += new System.EventHandler(this.hideToolbarMenuItem_Click);
+            hideToolbarMenuItem.Name = "hideToolbarMenuItem";
+            hideToolbarMenuItem.Size = new Size(78, 20);
+            hideToolbarMenuItem.Text = "Hide menu";
+            hideToolbarMenuItem.Click += hideToolbarMenuItem_Click;
+            // 
+            // closeClientToolStripMenuItem
+            // 
+            closeClientToolStripMenuItem.Name = "closeClientToolStripMenuItem";
+            closeClientToolStripMenuItem.Size = new Size(80, 20);
+            closeClientToolStripMenuItem.Text = "Close client";
+            closeClientToolStripMenuItem.Click += closeClientToolStripMenuItem_Click;
             // 
             // DimClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.dimMenuStrip);
-            this.Controls.Add(this.webView);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.dimMenuStrip;
-            this.Name = "DimClient";
-            this.Text = "DIM MultiClient - ";
-            ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
-            this.dimMenuStrip.ResumeLayout(false);
-            this.dimMenuStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.InactiveCaption;
+            ClientSize = new Size(1264, 681);
+            Controls.Add(dimMenuStrip);
+            Controls.Add(webView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = dimMenuStrip;
+            Name = "DimClient";
+            Text = "DIM MultiClient - ";
+            ((System.ComponentModel.ISupportInitialize)webView).EndInit();
+            dimMenuStrip.ResumeLayout(false);
+            dimMenuStrip.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -113,5 +117,6 @@ namespace DimMultiClient
         private MenuStrip dimMenuStrip;
         private ToolStripMenuItem hideToolbarMenuItem;
         private ToolStripMenuItem reloadPageMenuItem;
+        private ToolStripMenuItem closeClientToolStripMenuItem;
     }
 }

@@ -29,188 +29,295 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DimMultiClientLauncher));
-            this.playButton = new System.Windows.Forms.Button();
-            this.selectUserInput = new System.Windows.Forms.ComboBox();
-            this.selectUserLabel = new System.Windows.Forms.Label();
-            this.madeByLabel = new System.Windows.Forms.Label();
-            this.heightLabel = new System.Windows.Forms.Label();
-            this.heightInput = new System.Windows.Forms.TextBox();
-            this.widthLabel = new System.Windows.Forms.Label();
-            this.widthInput = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.profileSettingsTab = new System.Windows.Forms.TabPage();
-            this.closeAllLauncherButton = new System.Windows.Forms.Button();
-            this.windowSettingsTab = new System.Windows.Forms.TabPage();
-            this.adaptScreenSizeButton = new System.Windows.Forms.Button();
-            this.fullScreenCheckBox = new System.Windows.Forms.CheckBox();
-            this.tabControl1.SuspendLayout();
-            this.profileSettingsTab.SuspendLayout();
-            this.windowSettingsTab.SuspendLayout();
-            this.SuspendLayout();
+            playButton = new Button();
+            selectUserInput = new ComboBox();
+            selectUserLabel = new Label();
+            madeByLabel = new Label();
+            heightLabel = new Label();
+            heightInput = new TextBox();
+            widthLabel = new Label();
+            widthInput = new TextBox();
+            launcherTabControl = new TabControl();
+            launcherTab = new TabPage();
+            closeAllLauncherButton = new Button();
+            windowSettingsTab = new TabPage();
+            adaptScreenSizeButton = new Button();
+            fullScreenCheckBox = new CheckBox();
+            manageProfilesTab = new TabPage();
+            modifyProfileComboBox = new ComboBox();
+            modifyProfileLabel = new Label();
+            manageProfileNameTextBox = new TextBox();
+            manageProfileWidthTextBox = new TextBox();
+            manageProfileHeightTextBox = new TextBox();
+            manageProfileFullscreenCheckBox = new CheckBox();
+            manageProfileSaveButton = new Button();
+            manageProfileDeleteButton = new Button();
+            manageProfileDeleteAllButton = new Button();
+            launcherTabControl.SuspendLayout();
+            launcherTab.SuspendLayout();
+            windowSettingsTab.SuspendLayout();
+            manageProfilesTab.SuspendLayout();
+            SuspendLayout();
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(6, 56);
-            this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(114, 23);
-            this.playButton.TabIndex = 1;
-            this.playButton.Text = "Launch DIM";
-            this.playButton.UseVisualStyleBackColor = true;
-            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            playButton.Location = new Point(6, 56);
+            playButton.Name = "playButton";
+            playButton.Size = new Size(114, 23);
+            playButton.TabIndex = 1;
+            playButton.Text = "Launch DIM";
+            playButton.UseVisualStyleBackColor = true;
+            playButton.Click += playButton_Click;
             // 
             // selectUserInput
             // 
-            this.selectUserInput.FormattingEnabled = true;
-            this.selectUserInput.Location = new System.Drawing.Point(6, 27);
-            this.selectUserInput.Name = "selectUserInput";
-            this.selectUserInput.Size = new System.Drawing.Size(253, 23);
-            this.selectUserInput.TabIndex = 1;
-            this.selectUserInput.SelectedIndexChanged += new System.EventHandler(this.selectUserInput_SelectedIndexChanged);
-            this.selectUserInput.TextChanged += new System.EventHandler(this.selectUserInput_TextChanged);
+            selectUserInput.FormattingEnabled = true;
+            selectUserInput.Location = new Point(6, 27);
+            selectUserInput.Name = "selectUserInput";
+            selectUserInput.Size = new Size(253, 23);
+            selectUserInput.TabIndex = 1;
+            selectUserInput.SelectedIndexChanged += selectUserInput_SelectedIndexChanged;
+            selectUserInput.TextChanged += selectUserInput_TextChanged;
             // 
             // selectUserLabel
             // 
-            this.selectUserLabel.AutoSize = true;
-            this.selectUserLabel.Location = new System.Drawing.Point(6, 9);
-            this.selectUserLabel.Name = "selectUserLabel";
-            this.selectUserLabel.Size = new System.Drawing.Size(184, 15);
-            this.selectUserLabel.TabIndex = 0;
-            this.selectUserLabel.Text = "Select a profile or type a new one:";
+            selectUserLabel.AutoSize = true;
+            selectUserLabel.Location = new Point(6, 9);
+            selectUserLabel.Name = "selectUserLabel";
+            selectUserLabel.Size = new Size(184, 15);
+            selectUserLabel.TabIndex = 0;
+            selectUserLabel.Text = "Select a profile or type a new one:";
             // 
             // madeByLabel
             // 
-            this.madeByLabel.AutoSize = true;
-            this.madeByLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.madeByLabel.Location = new System.Drawing.Point(21, 183);
-            this.madeByLabel.Name = "madeByLabel";
-            this.madeByLabel.Size = new System.Drawing.Size(99, 15);
-            this.madeByLabel.TabIndex = 4;
-            this.madeByLabel.Text = "Made by: Tsadriu";
+            madeByLabel.AutoSize = true;
+            madeByLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            madeByLabel.Location = new Point(21, 183);
+            madeByLabel.Name = "madeByLabel";
+            madeByLabel.Size = new Size(99, 15);
+            madeByLabel.TabIndex = 4;
+            madeByLabel.Text = "Made by: Tsadriu";
             // 
             // heightLabel
             // 
-            this.heightLabel.AutoSize = true;
-            this.heightLabel.Location = new System.Drawing.Point(21, 80);
-            this.heightLabel.Name = "heightLabel";
-            this.heightLabel.Size = new System.Drawing.Size(43, 15);
-            this.heightLabel.TabIndex = 3;
-            this.heightLabel.Text = "Height";
+            heightLabel.AutoSize = true;
+            heightLabel.Location = new Point(21, 80);
+            heightLabel.Name = "heightLabel";
+            heightLabel.Size = new Size(43, 15);
+            heightLabel.TabIndex = 3;
+            heightLabel.Text = "Height";
             // 
             // heightInput
             // 
-            this.heightInput.Location = new System.Drawing.Point(21, 105);
-            this.heightInput.Name = "heightInput";
-            this.heightInput.PlaceholderText = "600";
-            this.heightInput.Size = new System.Drawing.Size(100, 23);
-            this.heightInput.TabIndex = 2;
-            this.heightInput.Text = "600";
+            heightInput.Location = new Point(21, 105);
+            heightInput.Name = "heightInput";
+            heightInput.PlaceholderText = "600";
+            heightInput.Size = new Size(100, 23);
+            heightInput.TabIndex = 2;
+            heightInput.Text = "600";
             // 
             // widthLabel
             // 
-            this.widthLabel.AutoSize = true;
-            this.widthLabel.Location = new System.Drawing.Point(21, 16);
-            this.widthLabel.Name = "widthLabel";
-            this.widthLabel.Size = new System.Drawing.Size(39, 15);
-            this.widthLabel.TabIndex = 1;
-            this.widthLabel.Text = "Width";
+            widthLabel.AutoSize = true;
+            widthLabel.Location = new Point(21, 16);
+            widthLabel.Name = "widthLabel";
+            widthLabel.Size = new Size(39, 15);
+            widthLabel.TabIndex = 1;
+            widthLabel.Text = "Width";
             // 
             // widthInput
             // 
-            this.widthInput.Location = new System.Drawing.Point(21, 34);
-            this.widthInput.Name = "widthInput";
-            this.widthInput.PlaceholderText = "800";
-            this.widthInput.Size = new System.Drawing.Size(100, 23);
-            this.widthInput.TabIndex = 0;
-            this.widthInput.Text = "800";
+            widthInput.Location = new Point(21, 34);
+            widthInput.Name = "widthInput";
+            widthInput.PlaceholderText = "800";
+            widthInput.Size = new Size(100, 23);
+            widthInput.TabIndex = 0;
+            widthInput.Text = "800";
             // 
-            // tabControl1
+            // launcherTabControl
             // 
-            this.tabControl1.Controls.Add(this.profileSettingsTab);
-            this.tabControl1.Controls.Add(this.windowSettingsTab);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(301, 294);
-            this.tabControl1.TabIndex = 4;
+            launcherTabControl.Controls.Add(launcherTab);
+            launcherTabControl.Controls.Add(windowSettingsTab);
+            launcherTabControl.Controls.Add(manageProfilesTab);
+            launcherTabControl.Location = new Point(12, 12);
+            launcherTabControl.Name = "launcherTabControl";
+            launcherTabControl.SelectedIndex = 0;
+            launcherTabControl.Size = new Size(301, 294);
+            launcherTabControl.TabIndex = 4;
             // 
-            // profileSettingsTab
+            // launcherTab
             // 
-            this.profileSettingsTab.Controls.Add(this.closeAllLauncherButton);
-            this.profileSettingsTab.Controls.Add(this.selectUserInput);
-            this.profileSettingsTab.Controls.Add(this.selectUserLabel);
-            this.profileSettingsTab.Controls.Add(this.playButton);
-            this.profileSettingsTab.Location = new System.Drawing.Point(4, 24);
-            this.profileSettingsTab.Name = "profileSettingsTab";
-            this.profileSettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.profileSettingsTab.Size = new System.Drawing.Size(293, 266);
-            this.profileSettingsTab.TabIndex = 0;
-            this.profileSettingsTab.Text = "Profile Settings";
-            this.profileSettingsTab.UseVisualStyleBackColor = true;
+            launcherTab.Controls.Add(closeAllLauncherButton);
+            launcherTab.Controls.Add(selectUserInput);
+            launcherTab.Controls.Add(selectUserLabel);
+            launcherTab.Controls.Add(playButton);
+            launcherTab.Location = new Point(4, 24);
+            launcherTab.Name = "launcherTab";
+            launcherTab.Padding = new Padding(3);
+            launcherTab.Size = new Size(293, 266);
+            launcherTab.TabIndex = 0;
+            launcherTab.Text = "Launcher";
+            launcherTab.UseVisualStyleBackColor = true;
             // 
             // closeAllLauncherButton
             // 
-            this.closeAllLauncherButton.Location = new System.Drawing.Point(145, 56);
-            this.closeAllLauncherButton.Name = "closeAllLauncherButton";
-            this.closeAllLauncherButton.Size = new System.Drawing.Size(114, 23);
-            this.closeAllLauncherButton.TabIndex = 3;
-            this.closeAllLauncherButton.Text = "Close all launchers";
-            this.closeAllLauncherButton.UseVisualStyleBackColor = true;
-            this.closeAllLauncherButton.Click += new System.EventHandler(this.closeAllLauncherButton_Click);
+            closeAllLauncherButton.Location = new Point(145, 56);
+            closeAllLauncherButton.Name = "closeAllLauncherButton";
+            closeAllLauncherButton.Size = new Size(114, 23);
+            closeAllLauncherButton.TabIndex = 3;
+            closeAllLauncherButton.Text = "Close all launchers";
+            closeAllLauncherButton.UseVisualStyleBackColor = true;
+            closeAllLauncherButton.Click += closeAllLauncherButton_Click;
             // 
             // windowSettingsTab
             // 
-            this.windowSettingsTab.Controls.Add(this.adaptScreenSizeButton);
-            this.windowSettingsTab.Controls.Add(this.fullScreenCheckBox);
-            this.windowSettingsTab.Controls.Add(this.madeByLabel);
-            this.windowSettingsTab.Controls.Add(this.widthLabel);
-            this.windowSettingsTab.Controls.Add(this.heightInput);
-            this.windowSettingsTab.Controls.Add(this.heightLabel);
-            this.windowSettingsTab.Controls.Add(this.widthInput);
-            this.windowSettingsTab.Location = new System.Drawing.Point(4, 24);
-            this.windowSettingsTab.Name = "windowSettingsTab";
-            this.windowSettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.windowSettingsTab.Size = new System.Drawing.Size(293, 266);
-            this.windowSettingsTab.TabIndex = 1;
-            this.windowSettingsTab.Text = "Window Settings";
-            this.windowSettingsTab.UseVisualStyleBackColor = true;
+            windowSettingsTab.Controls.Add(adaptScreenSizeButton);
+            windowSettingsTab.Controls.Add(fullScreenCheckBox);
+            windowSettingsTab.Controls.Add(madeByLabel);
+            windowSettingsTab.Controls.Add(widthLabel);
+            windowSettingsTab.Controls.Add(heightInput);
+            windowSettingsTab.Controls.Add(heightLabel);
+            windowSettingsTab.Controls.Add(widthInput);
+            windowSettingsTab.Location = new Point(4, 24);
+            windowSettingsTab.Name = "windowSettingsTab";
+            windowSettingsTab.Padding = new Padding(3);
+            windowSettingsTab.Size = new Size(293, 266);
+            windowSettingsTab.TabIndex = 1;
+            windowSettingsTab.Text = "Window Settings";
+            windowSettingsTab.UseVisualStyleBackColor = true;
             // 
             // adaptScreenSizeButton
             // 
-            this.adaptScreenSizeButton.Location = new System.Drawing.Point(127, 25);
-            this.adaptScreenSizeButton.Name = "adaptScreenSizeButton";
-            this.adaptScreenSizeButton.Size = new System.Drawing.Size(88, 38);
-            this.adaptScreenSizeButton.TabIndex = 6;
-            this.adaptScreenSizeButton.Text = "Adapt to screen size";
-            this.adaptScreenSizeButton.UseVisualStyleBackColor = true;
-            this.adaptScreenSizeButton.Click += new System.EventHandler(this.adaptScreenSizeButton_Click);
+            adaptScreenSizeButton.Location = new Point(127, 25);
+            adaptScreenSizeButton.Name = "adaptScreenSizeButton";
+            adaptScreenSizeButton.Size = new Size(88, 38);
+            adaptScreenSizeButton.TabIndex = 6;
+            adaptScreenSizeButton.Text = "Adapt to screen size";
+            adaptScreenSizeButton.UseVisualStyleBackColor = true;
+            adaptScreenSizeButton.Click += adaptScreenSizeButton_Click;
             // 
             // fullScreenCheckBox
             // 
-            this.fullScreenCheckBox.AutoSize = true;
-            this.fullScreenCheckBox.Location = new System.Drawing.Point(127, 107);
-            this.fullScreenCheckBox.Name = "fullScreenCheckBox";
-            this.fullScreenCheckBox.Size = new System.Drawing.Size(84, 19);
-            this.fullScreenCheckBox.TabIndex = 5;
-            this.fullScreenCheckBox.Text = "Fullscreen?";
-            this.fullScreenCheckBox.UseVisualStyleBackColor = true;
+            fullScreenCheckBox.AutoSize = true;
+            fullScreenCheckBox.Location = new Point(127, 107);
+            fullScreenCheckBox.Name = "fullScreenCheckBox";
+            fullScreenCheckBox.Size = new Size(84, 19);
+            fullScreenCheckBox.TabIndex = 5;
+            fullScreenCheckBox.Text = "Fullscreen?";
+            fullScreenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // manageProfilesTab
+            // 
+            manageProfilesTab.Controls.Add(manageProfileDeleteAllButton);
+            manageProfilesTab.Controls.Add(manageProfileDeleteButton);
+            manageProfilesTab.Controls.Add(manageProfileSaveButton);
+            manageProfilesTab.Controls.Add(manageProfileFullscreenCheckBox);
+            manageProfilesTab.Controls.Add(manageProfileHeightTextBox);
+            manageProfilesTab.Controls.Add(manageProfileWidthTextBox);
+            manageProfilesTab.Controls.Add(manageProfileNameTextBox);
+            manageProfilesTab.Controls.Add(modifyProfileLabel);
+            manageProfilesTab.Controls.Add(modifyProfileComboBox);
+            manageProfilesTab.Location = new Point(4, 24);
+            manageProfilesTab.Name = "manageProfilesTab";
+            manageProfilesTab.Padding = new Padding(3);
+            manageProfilesTab.Size = new Size(293, 266);
+            manageProfilesTab.TabIndex = 2;
+            manageProfilesTab.Text = "Manage Profiles";
+            manageProfilesTab.UseVisualStyleBackColor = true;
+            // 
+            // modifyProfileComboBox
+            // 
+            modifyProfileComboBox.FormattingEnabled = true;
+            modifyProfileComboBox.Location = new Point(20, 29);
+            modifyProfileComboBox.Name = "modifyProfileComboBox";
+            modifyProfileComboBox.Size = new Size(253, 23);
+            modifyProfileComboBox.TabIndex = 2;
+            // 
+            // modifyProfileLabel
+            // 
+            modifyProfileLabel.AutoSize = true;
+            modifyProfileLabel.Location = new Point(20, 11);
+            modifyProfileLabel.Name = "modifyProfileLabel";
+            modifyProfileLabel.Size = new Size(153, 15);
+            modifyProfileLabel.TabIndex = 3;
+            modifyProfileLabel.Text = "Select the profile to modify:";
+            // 
+            // manageProfileNameTextBox
+            // 
+            manageProfileNameTextBox.Location = new Point(20, 80);
+            manageProfileNameTextBox.Name = "manageProfileNameTextBox";
+            manageProfileNameTextBox.Size = new Size(100, 23);
+            manageProfileNameTextBox.TabIndex = 4;
+            // 
+            // manageProfileWidthTextBox
+            // 
+            manageProfileWidthTextBox.Location = new Point(20, 131);
+            manageProfileWidthTextBox.Name = "manageProfileWidthTextBox";
+            manageProfileWidthTextBox.Size = new Size(100, 23);
+            manageProfileWidthTextBox.TabIndex = 5;
+            // 
+            // manageProfileHeightTextBox
+            // 
+            manageProfileHeightTextBox.Location = new Point(20, 186);
+            manageProfileHeightTextBox.Name = "manageProfileHeightTextBox";
+            manageProfileHeightTextBox.Size = new Size(100, 23);
+            manageProfileHeightTextBox.TabIndex = 6;
+            // 
+            // manageProfileFullscreenCheckBox
+            // 
+            manageProfileFullscreenCheckBox.AutoSize = true;
+            manageProfileFullscreenCheckBox.Location = new Point(154, 82);
+            manageProfileFullscreenCheckBox.Name = "manageProfileFullscreenCheckBox";
+            manageProfileFullscreenCheckBox.Size = new Size(84, 19);
+            manageProfileFullscreenCheckBox.TabIndex = 7;
+            manageProfileFullscreenCheckBox.Text = "Fullscreen?";
+            manageProfileFullscreenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // manageProfileSaveButton
+            // 
+            manageProfileSaveButton.Location = new Point(154, 128);
+            manageProfileSaveButton.Name = "manageProfileSaveButton";
+            manageProfileSaveButton.Size = new Size(119, 23);
+            manageProfileSaveButton.TabIndex = 8;
+            manageProfileSaveButton.Text = "Save changes";
+            manageProfileSaveButton.UseVisualStyleBackColor = true;
+            // 
+            // manageProfileDeleteButton
+            // 
+            manageProfileDeleteButton.Location = new Point(154, 157);
+            manageProfileDeleteButton.Name = "manageProfileDeleteButton";
+            manageProfileDeleteButton.Size = new Size(119, 23);
+            manageProfileDeleteButton.TabIndex = 9;
+            manageProfileDeleteButton.Text = "Delete this profile";
+            manageProfileDeleteButton.UseVisualStyleBackColor = true;
+            // 
+            // manageProfileDeleteAllButton
+            // 
+            manageProfileDeleteAllButton.Location = new Point(154, 186);
+            manageProfileDeleteAllButton.Name = "manageProfileDeleteAllButton";
+            manageProfileDeleteAllButton.Size = new Size(119, 23);
+            manageProfileDeleteAllButton.TabIndex = 10;
+            manageProfileDeleteAllButton.Text = "Delete all profiles";
+            manageProfileDeleteAllButton.UseVisualStyleBackColor = true;
             // 
             // DimMultiClientLauncher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 317);
-            this.Controls.Add(this.tabControl1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "DimMultiClientLauncher";
-            this.Text = "DIM MultiClient - ";
-            this.tabControl1.ResumeLayout(false);
-            this.profileSettingsTab.ResumeLayout(false);
-            this.profileSettingsTab.PerformLayout();
-            this.windowSettingsTab.ResumeLayout(false);
-            this.windowSettingsTab.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(338, 317);
+            Controls.Add(launcherTabControl);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "DimMultiClientLauncher";
+            Text = "DIM MultiClient - ";
+            launcherTabControl.ResumeLayout(false);
+            launcherTab.ResumeLayout(false);
+            launcherTab.PerformLayout();
+            windowSettingsTab.ResumeLayout(false);
+            windowSettingsTab.PerformLayout();
+            manageProfilesTab.ResumeLayout(false);
+            manageProfilesTab.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -222,11 +329,21 @@
         private Label widthLabel;
         private TextBox widthInput;
         private Label madeByLabel;
-        private TabControl tabControl1;
-        private TabPage profileSettingsTab;
+        private TabControl launcherTabControl;
+        private TabPage launcherTab;
         private TabPage windowSettingsTab;
         private Button closeAllLauncherButton;
         private Button adaptScreenSizeButton;
         private CheckBox fullScreenCheckBox;
+        private TabPage manageProfilesTab;
+        private Label modifyProfileLabel;
+        private ComboBox modifyProfileComboBox;
+        private Button manageProfileDeleteAllButton;
+        private Button manageProfileDeleteButton;
+        private Button manageProfileSaveButton;
+        private CheckBox manageProfileFullscreenCheckBox;
+        private TextBox manageProfileHeightTextBox;
+        private TextBox manageProfileWidthTextBox;
+        private TextBox manageProfileNameTextBox;
     }
 }
