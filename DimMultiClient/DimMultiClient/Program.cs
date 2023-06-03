@@ -5,14 +5,14 @@ namespace DimMultiClient
 {
     internal static class Program
     {
-        private static VersionEnum currentVersion = VersionEnum.V1_0_2;
+        private static VersionEnum currentVersion = VersionEnum.V1_1_0;
         public static DimMultiClientLauncher Launcher = null!;
 
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.

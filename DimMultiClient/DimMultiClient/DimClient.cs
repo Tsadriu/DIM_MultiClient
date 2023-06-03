@@ -14,7 +14,7 @@ namespace DimMultiClient
             InitializeComponent();
             dimMenuStrip.Visible = false;
             SetWindowProperties(currentUser, clientWidth, clientHeight, isClientFullScreen);
-            Task.Run(LaunchDimClient);
+            Task.Run(LaunchDimClientAsync);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace DimMultiClient
         /// Task that launches a web request to load the dim client.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task LaunchDimClient()
+        public async Task LaunchDimClientAsync()
         {
             string directory = Path.Combine(DimMultiClientLauncher.ProgramNetworkStorage, _currentUser);
             var webViewEnvironment = await CoreWebView2Environment.CreateAsync(string.Empty, directory);
