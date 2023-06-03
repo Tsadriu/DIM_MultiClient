@@ -1,21 +1,20 @@
-﻿using DimMultiClient;
-using Microsoft.Web.WebView2.Core;
+﻿using Microsoft.Web.WebView2.Core;
 using TsadriuUtilities;
 
 namespace DimMultiClient
 {
     public partial class DimClient : Form
     {
-        private readonly string dimLink = "https://app.destinyitemmanager.com/";
-        private string currentUser = string.Empty;
-        private bool isFullScreen = false;
+        private const string DimLink = "https://app.destinyitemmanager.com/";
+        private string _currentUser = string.Empty;
+        private bool _isFullScreen;
 
-        public DimClient(string windowName, int width, int height, bool isFullScreen)
+        public DimClient(string currentUser, int clientWidth, int clientHeight, bool isClientFullScreen)
         {
             InitializeComponent();
             dimMenuStrip.Visible = false;
-            SetWindowProperties(windowName, width, height, isFullScreen);
-            Task.Run(LaunchGame);
+            SetWindowProperties(currentUser, clientWidth, clientHeight, isClientFullScreen);
+            Task.Run(LaunchDimClientAsync);
         }
 
         /// <summary>
@@ -25,26 +24,23 @@ namespace DimMultiClient
         /// <param name="keyEvent">Current event.</param>
         private void webView_KeyDown(object sender, KeyEventArgs keyEvent)
         {
-            if (keyEvent.KeyCode == Keys.Home)
+            switch (keyEvent.KeyCode)
             {
-                dimMenuStrip.Visible = !dimMenuStrip.Visible;
-            }
-
-            if (keyEvent.KeyCode == Keys.F11)
-            {
-                if (isFullScreen)
-                {
-                    isFullScreen = false;
+                case Keys.Home:
+                    dimMenuStrip.Visible = !dimMenuStrip.Visible;
+                    break;
+                case Keys.F11 when _isFullScreen:
+                    _isFullScreen = false;
                     FormBorderStyle = FormBorderStyle.Sizable;
                     WindowState = FormWindowState.Normal;
                     CenterToScreen();
                     return;
-                }
-
-                isFullScreen = true;
-                FormBorderStyle = FormBorderStyle.None;
-                WindowState = FormWindowState.Maximized;
-                CenterToScreen();
+                case Keys.F11:
+                    _isFullScreen = true;
+                    FormBorderStyle = FormBorderStyle.None;
+                    WindowState = FormWindowState.Maximized;
+                    CenterToScreen();
+                    break;
             }
         }
 
@@ -61,36 +57,40 @@ namespace DimMultiClient
         /// <summary>
         /// Sets the window's properties, such as the window name, size and location.
         /// </summary>
-        /// <param name="profileName">The profile user's name.</param>
-        /// <param name="width">Width of the window.</param>
-        /// <param name="height">Height of the window.</param>
-        /// <param name="isFullScreen">Should this app start in full screen or not.</param>
-        private void SetWindowProperties(string profileName, int width, int height, bool isFullScreen)
+        /// <param name="currentUser">The profile user's name.</param>
+        /// <param name="clientWidth">Width of the window.</param>
+        /// <param name="clientHeight">Height of the window.</param>
+        /// <param name="isClientFullScreen">Should this app start in full screen or not.</param>
+        private void SetWindowProperties(string currentUser, int clientWidth, int clientHeight, bool isClientFullScreen)
         {
             StartPosition = Program.Launcher.StartPosition;
-            currentUser = profileName;
-            Size = new Size(width, height);
-            Text += $"{Program.GetVersionAsString()} - {profileName.LetterUpperCase()}";
-            Resize += new EventHandler(ResizeWebView);
+            _currentUser = currentUser;
+            Size = new Size(clientWidth, clientHeight);
+            Text += $@"{Program.GetVersionAsString()} - {currentUser.LetterUpperCase()}";
+            Resize += ResizeWebView;
             Location = Program.Launcher.Location;
 
             // Resize the window.
-            ResizeWebView(this, EventArgs.Empty);
-            webView_KeyDown(this, isFullScreen ? new KeyEventArgs(Keys.F11) : new KeyEventArgs(Keys.None));
+            ResizeWebView(null, EventArgs.Empty);
+            webView_KeyDown(this, isClientFullScreen ? new KeyEventArgs(Keys.F11) : new KeyEventArgs(Keys.None));
         }
 
         /// <summary>
-        /// Task that launches a web request to load the game.
+        /// Task that launches a web request to load the dim client.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task LaunchGame()
+        public async Task LaunchDimClientAsync()
         {
-            var directory = Path.Combine(DimMultiClientLauncher.ProgramNetworkStorage, currentUser);
+            string directory = Path.Combine(DimMultiClientLauncher.ProgramNetworkStorage, _currentUser);
             var webViewEnvironment = await CoreWebView2Environment.CreateAsync(string.Empty, directory);
             await webView.EnsureCoreWebView2Async(webViewEnvironment);
-            webView.Source = new Uri(dimLink);
-            webView.CoreWebView2.Settings.UserAgent = "Chrome/103.0.0.0";
+            webView.Source = new Uri(DimLink);
+
+            // Set the agent to appear as a chrome browser
+            webView.CoreWebView2.Settings.UserAgent = "Chrome/114.0.0.0";
             webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+
+            // Display the window to the user
             Show();
         }
 
@@ -102,6 +102,11 @@ namespace DimMultiClient
         private void hideToolbarMenuItem_Click(object sender, EventArgs e)
         {
             dimMenuStrip.Visible = false;
+        }
+
+        private void closeClientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
