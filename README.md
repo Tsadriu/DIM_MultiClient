@@ -20,6 +20,7 @@
 
 Depending on which disk you decided to store this program, it will be on:
 * **[SELECTED DISK]**/Dim MultiClient
+* You can delete all profiles in the **Manage Profiles** tab in the launcher.
 
 # Hotkeys
 
@@ -27,4 +28,4 @@ You can press **HOME** to display a little hotbar on the top of the window.
 * In case your window freezes, you can press the **Reload page** button.
 
 # TO-DO
-* Add a profile window to make it easier to manage profiles.
+* Nothing planned.
